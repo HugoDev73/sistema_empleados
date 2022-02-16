@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+{% include 'includes/header.html'%}
+
+<div class="container">
+    <h2>Empleados por departamento</h2> 
+<ul>
+    
+    {% for empleado in object_list %}
+        <li>{{empleado}}</li>
+    {% endfor %}
+        
+</ul>
+</div>
+{% endblock content %}

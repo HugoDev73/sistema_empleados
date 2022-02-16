@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Editar Empleado
+{% endblock title %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+<div class="container p-5">
+    <div class="row">
+        <h2>Eliminar Empleado: {{ object.first_name }}</h2>
+    </div>
+    <div class="row">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <p>¿Realmente desea eliminar?</p>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+

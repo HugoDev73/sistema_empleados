@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block content %}
+{% include 'includes/header.html'%}
+<div class="container mt-4">
+  <div class="row">
+    <form method="GET">
+      {% csrf_token %}
+    <h2>Lista de empleados</h2>
+    <div class="col-8">
+      <input id="kword" name="kword"
+        class="form-control"
+        type="text"
+        placeholder="Buscar empleado"
+        aria-label=".form-control-lg example"
+      />
+    </div>
+    <div class="col-4">
+      <button type="submit" class="btn btn-dark">Buscar</button>
+    </div>
+  </form>
+  </div>
+  <div class="tabla-empleados">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NOMBRES</th>
+          <th scope="col">APELLIDOS</th>
+          <th scope="col">DEPARTAMENTO</th>
+          <th scope="col">ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for empleado in object_list %}
+        <tr>
+          <th scope="row">{{empleado.id}}</th>
+          <td>{{empleado.first_name}}</td>
+          <td>{{empleado.last_name}}</td>
+          <td>{{empleado.departamento}}</td>
+          <td><a href=" {% url 'persona_app:empleado_detail' empleado.id %} " class="btn btn-primary">Ver</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="paginacion">
+    
+    {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        
+        {% if page_obj.has_previous %}
+        <li class="page-item ">
+          <a class="page-link"  href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Atras</a>
+        </li>
+        {% endif %}
+
+        
+        {% for pagina in paginator.page_range %}
+        <li class="page-item"><a class="page-link" href="?page={{pagina}}">{{pagina}}</a></li>
+        {% endfor %}
+          
+        
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{page_obj.next_page_number}}">Siguiente</a>
+        </li>
+        {% endif %}
+    
+      </ul>
+    </nav>
+    {% endif %}
+      
+  </div>
+</div>
+
+{% endblock content %}

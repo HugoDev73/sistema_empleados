@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ empleado.first_name }}
+{% endblock title %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+<div class="container p-2">
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+          {% if empleado.avatar %}
+            <img src="{{empleado.avatar.url}}" class="img-fluid rounded-start" alt="...">
+          {% else %}
+            <img src=" {% static 'img/default.png' %} " class="img-fluid rounded-start" alt="...">
+          {% endif %}
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{empleado.full_name}}</h5>
+          <h5 class="card-title">{{empleado.get_job_display}}</h5>
+          <h5 class="card-title">{{empleado.departamento}}</h5>
+          <p class="card-text">Habilidades</p>
+          <ul>
+              
+              {% for habilidad in empleado.habilidades.all %}
+                  <li>
+                      {{habilidad}}
+                  </li>
+              {% endfor %}
+                  
+          </ul>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

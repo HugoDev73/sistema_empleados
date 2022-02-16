@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Nuevo Departamento
+{% endblock title %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="container">
+    <div class="row">
+        <h2>Nuevo Departamento</h2>
+    </div>
+    <div class="row">
+        <form  method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h4>Empleado</h4>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                {{form.nombre}}
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Apellidos</label>
+                {{form.apellidos}}
+            </div>
+            <div class="divider"></div>
+            <h4>Departamento</h4>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Departamento</label>
+                {{form.departamento}}
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nombre corto</label>
+                {{form.shortname}}
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+
+            
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
